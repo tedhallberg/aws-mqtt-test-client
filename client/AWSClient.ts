@@ -101,7 +101,7 @@ export class AWSClient implements IAWSClient {
   }
 
   /**
-   * Method to subscribe to topics
+   * Method to publish a message to a topic
    * @param {string} topic the topic to publish to
    * @param {string} message the message to send
    * @returns {Promise<void>} a promise
