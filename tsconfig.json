@@ -1,0 +1,26 @@
+{
+  "compilerOptions": {
+    "outDir": "out",
+    "types": ["jest", "node"],
+    "typeRoots": ["node_modules/@types"],
+    "resolveJsonModule": true,
+    "esModuleInterop": true,
+    "target": "ES2022",                                  /* Set the JavaScript language version for emitted JavaScript and include compatible library declarations. */
+    "module": "commonjs",                                /* Specify what module code is generated. */
+    "moduleResolution": "node",                       /* Specify how TypeScript looks up a file from a given module specifier. */
+    "forceConsistentCasingInFileNames": true,            /* Ensure that casing is correct in imports. */
+    "strict": true,                                      /* Enable all strict type-checking options. */
+    "skipLibCheck": true,                                 /* Skip type checking all .d.ts files. */
+    "sourceMap": true,
+    "baseUrl": "./",
+    "paths": {
+      "@common/*": [
+        "src/common/*"
+      ],
+    }
+  },
+  "ts-node": {
+    // Do not forget to `npm i -D tsconfig-paths`
+    "require": ["tsconfig-paths/register"]
+  },
+}
