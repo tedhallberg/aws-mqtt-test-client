@@ -5,3 +5,5 @@ out/
 *.pem
 *.key
 node_modules
+coverage
+package-lock.json

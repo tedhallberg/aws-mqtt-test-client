@@ -95,7 +95,7 @@ module.exports = {
     'import/no-unresolved': [
       'error',
       {
-        ignore: ['aws-lambda', 'util-dynamodb'],
+        ignore: [],
       },
     ],
     'import/no-extraneous-dependencies': [

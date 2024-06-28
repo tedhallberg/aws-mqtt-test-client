@@ -1,8 +1,8 @@
-import { IAWSClient } from 'interfaces/IAWSClient';
 import * as mqtt from 'mqtt';
 import * as fs from 'fs';
-import { log } from 'utils/logger';
+import { log } from 'src/utils/logger';
 import { execSync } from 'child_process';
+import { IAWSClient } from 'src/interfaces/IAWSClient';
 
 const LOG_PACKETS = true; // Set to true to log all packets
 
@@ -14,6 +14,8 @@ export class AWSClient implements IAWSClient {
   mqttOptions: mqtt.IClientOptions;
 
   client!: mqtt.MqttClient;
+
+  certificateId!: string;
 
   /**
    * @param {mqtt} mqttClient the injected mqtt client
@@ -44,10 +46,11 @@ export class AWSClient implements IAWSClient {
       clean: true,
       reconnectPeriod: 0, // Disable automatic reconnect
     };
+    this.certificateId = AWSClient.generateCertificateId(certPath);
 
     console.log(`
     ==== Client configuration ====
-    Certificate id: ${AWSClient.generateCertificateId(certPath)}
+    Certificate id: ${this.certificateId}
     Client id: ${this.clientId}
     Certificate path: ${this.certPath}
     Key path: ${this.keyPath}
@@ -184,6 +187,7 @@ export class AWSClient implements IAWSClient {
     try {
       this.client = await this.mqttClient.connectAsync(`${this.mqttOptions.protocol}://${brokerEndpoint}`, this.mqttOptions);
       log('Connected to AWS IoT broker:', brokerEndpoint);
+      // Register event handlers
       this.client.on('packetreceive', AWSClient.onPacketHandler);
       this.client.on('packetsend', AWSClient.onPacketHandler);
       this.client.on('message', AWSClient.onMessageHandler);

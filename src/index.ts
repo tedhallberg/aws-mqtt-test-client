@@ -1,19 +1,19 @@
-import { AWSClient } from 'client/AWSClient';
 import * as mqtt from 'mqtt';
-import { log } from 'utils/logger';
+import { log } from './utils/logger';
+import { AWSClient } from './client/AWSClient';
 
 // Paths to the client certificate, private key, and AWS IoT root CA
-const KEY_PATH = 'path_to_private_key';
-const CERT_PATH = 'path_to_client_certificate';
+const KEY_PATH = '<PATH to PRIVATE KEY>';
+const CERT_PATH = '<PATH to CERTIFICATE>';
 const CA_PATH = './certificates/awsRootCA.crt';
 
 // AWS IoT endpoint and client ID
-const CLIENT_ID = 'the_client_id';
-const ENDPOINT = 'the_broker_endpoint';
+const CLIENT_ID = '<THE CLIENT_ID>'; // Should be thing name when certificate is registered in AWS IoT
+const ENDPOINT = '<YOUR AWS IOT ENDPOINT>';
 
 // Topics to subscribe and publish to
-const SUB_TOPICS = ['list_of_topics_to_subscribe_to'];
-const PUB_TOPIC = `some_topic_to_publish_to`;
+const SUB_TOPICS = ['<TOPIC1>', '<TOPIC2>'];
+const PUB_TOPIC = `<TOPIC TO PUBLISH TO>`;
 
 // Message to publish
 const MESSAGE = 'Hello from test client';

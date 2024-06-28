@@ -12,11 +12,9 @@
     "strict": true,                                      /* Enable all strict type-checking options. */
     "skipLibCheck": true,                                 /* Skip type checking all .d.ts files. */
     "sourceMap": true,
-    "baseUrl": "./",
+    "baseUrl": ".",
     "paths": {
-      "@common/*": [
-        "src/common/*"
-      ],
+      "src/*": ["src/*"]
     }
   },
   "ts-node": {
