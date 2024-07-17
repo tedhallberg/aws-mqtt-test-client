@@ -42,7 +42,7 @@ let awsClient: AWSClient;
 describe('AWSClient tests', () => {
   beforeAll(async () => {
     // Create a new instance of the AWSClient
-    awsClient = new AWSClient(mock, 'certPath', 'keyPath', 'caPath', 'clientId', ['topic']);
+    awsClient = new AWSClient(mock, 'certPath', 'keyPath', 'caPath', 'clientId');
 
     const expectedMqttOptions = {
       port: 443,
@@ -79,13 +79,13 @@ describe('AWSClient tests', () => {
 
   test('that subscribeAsync is correctly called when client is connected', async () => {
     mock.connected = true;
-    await awsClient.subscribe();
+    await awsClient.subscribe(['topic']);
     expect(mock.subscribeAsync).toHaveBeenCalledWith(['topic']);
   });
 
   test('that subscribeAsync is not called when client is not connected', async () => {
     mock.connected = false;
-    await awsClient.subscribe();
+    await awsClient.subscribe(['topic']);
     expect(mock.subscribeAsync).not.toHaveBeenCalled();
   });
 

@@ -25,14 +25,7 @@ export class AWSClient implements IAWSClient {
    * @param {string} clientId the client id
    * @param {string[]} subscriptionTopics the topics to subscribe to
    */
-  constructor(
-    private mqttClient: typeof mqtt,
-    private certPath: string,
-    private keyPath: string,
-    private caPath: string,
-    private clientId: string,
-    private subscriptionTopics: string[]
-  ) {
+  constructor(private mqttClient: typeof mqtt, private certPath: string, private keyPath: string, private caPath: string, private clientId: string) {
     log('Initializing new AWS IoT client instance');
     this.mqttOptions = {
       port: 443,
@@ -87,17 +80,18 @@ export class AWSClient implements IAWSClient {
 
   /**
    * Method to subscribe to topic(s)
+   * @param {string[]} topics the topics to subscribe to
    * @returns {void}
    */
-  public async subscribe(): Promise<void> {
+  public async subscribe(topics: string[]): Promise<void> {
     try {
       if (!this.client?.connected) {
         log('Client not connected, skipping subscription attempt');
         return;
       }
-      log('Subscribing to topics:', this.subscriptionTopics);
-      await this.client.subscribeAsync(this.subscriptionTopics);
-      log('Successfully subscribed to:', this.subscriptionTopics);
+      log('Subscribing to topics:', topics);
+      await this.client.subscribeAsync(topics);
+      log('Successfully subscribed to:', topics);
     } catch (err: any) {
       log('Subscription failed: ', err.message);
     }

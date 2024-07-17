@@ -19,7 +19,7 @@ const PUB_TOPIC = `<TOPIC TO PUBLISH TO>`;
 const MESSAGE = 'Hello from test client';
 
 // Create a new AWSClient instance
-const client = new AWSClient(mqtt, CERT_PATH, KEY_PATH, CA_PATH, CLIENT_ID, SUB_TOPICS);
+const client = new AWSClient(mqtt, CERT_PATH, KEY_PATH, CA_PATH, CLIENT_ID);
 
 // Set raw mode to true for capturing individual key presses
 process.stdin.setRawMode(true);
@@ -51,7 +51,7 @@ process.stdin.on('data', async (key) => {
         await client.publish(PUB_TOPIC, MESSAGE);
         break;
       case 's':
-        await client.subscribe();
+        await client.subscribe(SUB_TOPICS);
         break;
       case 'q':
         log('Exiting...');
